@@ -13,9 +13,9 @@ A simple web application built with Django that allows users to scrape text data
 ## Installation
 
 ### Prerequisites
-- Python 3.9+
-- Django 5.1.6
-- Virtual environment (recommended)
+- Python 
+- Django 
+- Virtual environment 
 
 ### Setup
 

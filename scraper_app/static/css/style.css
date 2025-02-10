@@ -1,0 +1,77 @@
+body {
+            background-color: #e0f7fa;
+            font-family: Arial, sans-serif;
+            color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            padding: 50px;
+            width: 900px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            text-align: left;
+            margin-top: 20px;
+        }
+        .container h2 {
+            color: #000000;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .input-label {
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: #000000;
+        }
+        .form-control {
+            border-radius: 8px;
+            font-size: 1.2rem;
+            padding: 12px;
+            width: 100%;
+            margin-top: 5px;
+        }
+        .form-control::placeholder {
+            color: #aaa;
+            font-size: 1rem;
+        }
+        .form-control:focus {
+            border-color: #00a7ef;
+            outline: none;
+        }
+        .btn-custom {
+            background-color: #0091f7;
+            color: white;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            width: 100%;
+        }
+        .btn-custom:hover {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .form-group input[type="file"] {
+            font-size: 1rem;
+            padding: 12px;
+            cursor: pointer;
+        }
+        .export-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }

@@ -103,6 +103,7 @@
     <input type="file" name="docx" id="docx" class="form-control">
 </div>
 
+
             <!-- Submit button -->
             <button type="submit" class="btn btn-custom btn-lg">Scrape</button>
         </form>
@@ -111,5 +112,14 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gyb3AlVQv02zQxI1tZyjKsmvLMfv47JyxD8+6cOkpMF6ddgD3p8" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0Teal+43OVA3qBqA6nXmt2PY2fZq1z6QbG2zZXEKp3RZo3oK" crossorigin="anonymous"></script>
+
+{% if messages %}
+    <script>
+        {% for message in messages %}
+            alert("{{ message }}");
+        {% endfor %}
+    </script>
+{% endif %}
+
 </body>
 </html>

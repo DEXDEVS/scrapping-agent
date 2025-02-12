@@ -75,3 +75,20 @@ body {
             gap: 15px;
             margin-top: 20px;
         }
+
+.navbar {
+    border-bottom: 2px solid #ddd;
+}
+
+.container-fluid {
+    padding-top: 80px; /* Extra space below navbar */
+}
+
+.table {
+    width: 100%; /* Make the table full width */
+}
+
+.scrape-form {
+    margin-bottom: 40px; /* Add more space below the form */
+}
+

@@ -1,0 +1,13 @@
+# Virtual environment
+.venv/
+env/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Database file (optional if using SQLite)
+db.sqlite3
+
+# Ignore Django migrations compiled files
+*/migrations/*.pyc

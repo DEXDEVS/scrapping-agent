@@ -1,0 +1,126 @@
+Scraping failed: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
+Traceback (most recent call last):
+  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 161, in scrape_data
+    response = requests.get(url)
+               ^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 575, in request
+    prep = self.prepare_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 484, in prepare_request
+    p.prepare(
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 367, in prepare
+    self.prepare_url(url, params)
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 438, in prepare_url
+    raise MissingSchema(
+requests.exceptions.MissingSchema: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
+Scraping failed: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
+Traceback (most recent call last):
+  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 161, in scrape_data
+    response = requests.get(url)
+               ^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 575, in request
+    prep = self.prepare_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 484, in prepare_request
+    p.prepare(
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 367, in prepare
+    self.prepare_url(url, params)
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 438, in prepare_url
+    raise MissingSchema(
+requests.exceptions.MissingSchema: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
+Scraping failed: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
+Traceback (most recent call last):
+  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 161, in scrape_data
+    response = requests.get(url)
+               ^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 575, in request
+    prep = self.prepare_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 484, in prepare_request
+    p.prepare(
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 367, in prepare
+    self.prepare_url(url, params)
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 438, in prepare_url
+    raise MissingSchema(
+requests.exceptions.MissingSchema: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
+Scraping failed: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
+Traceback (most recent call last):
+  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 161, in scrape_data
+    response = requests.get(url)
+               ^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 575, in request
+    prep = self.prepare_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 484, in prepare_request
+    p.prepare(
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 367, in prepare
+    self.prepare_url(url, params)
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 438, in prepare_url
+    raise MissingSchema(
+requests.exceptions.MissingSchema: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
+Scraping failed: Invalid URL '.....': No scheme supplied. Perhaps you meant https://.....?
+Traceback (most recent call last):
+  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 161, in scrape_data
+    response = requests.get(url)
+               ^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 575, in request
+    prep = self.prepare_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 484, in prepare_request
+    p.prepare(
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 367, in prepare
+    self.prepare_url(url, params)
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 438, in prepare_url
+    raise MissingSchema(
+requests.exceptions.MissingSchema: Invalid URL '.....': No scheme supplied. Perhaps you meant https://.....?
+Scraping failed: Invalid URL '.....': No scheme supplied. Perhaps you meant https://.....?
+Traceback (most recent call last):
+  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 161, in scrape_data
+    response = requests.get(url)
+               ^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 575, in request
+    prep = self.prepare_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 484, in prepare_request
+    p.prepare(
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 367, in prepare
+    self.prepare_url(url, params)
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 438, in prepare_url
+    raise MissingSchema(
+requests.exceptions.MissingSchema: Invalid URL '.....': No scheme supplied. Perhaps you meant https://.....?

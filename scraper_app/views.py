@@ -17,7 +17,6 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-
 def login_page(request):
     if request.method == "POST":
         username = request.POST.get("username")
@@ -75,7 +74,7 @@ def logout_page(request):
 def export_csv(request):
     try:
         recent_data = ScrapedData.objects.filter(user=request.user)
-        if not recent_data.exists():
+        if not recent_data:
             return HttpResponse("No data found", status=404)
 
         response = HttpResponse(content_type="text/csv")
@@ -98,7 +97,7 @@ def export_json(request):
         recent_data = ScrapedData.objects.filter(user=request.user).values(
             'source_name', 'content', 'question', 'answer'
         )
-        if not recent_data.exists():
+        if not recent_data:
             return HttpResponse("No data found", status=404)
 
         response = HttpResponse(json.dumps(list(recent_data), indent=4), content_type='application/json')
@@ -146,6 +145,8 @@ def extract_docx_to_df(file_path):
 
 @login_required(login_url='/login/')
 def scrape_data(request):
+    latest_scraped_data = None  # Initialize variable for storing the most recent entry
+
     if request.method == "POST":
         if not request.user.is_authenticated:
             messages.error(request, "You must be logged in to extract data.")
@@ -161,7 +162,7 @@ def scrape_data(request):
                 if response.status_code == 200:
                     soup = BeautifulSoup(response.content, 'html.parser')
                     extracted_text = '\n'.join(p.get_text() for p in soup.find_all('p'))
-                    ScrapedData.objects.create(
+                    latest_scraped_data = ScrapedData.objects.create(
                         user=request.user,
                         source_name=url,
                         content=extracted_text
@@ -172,7 +173,7 @@ def scrape_data(request):
                 path = default_storage.save(pdf_file.name, ContentFile(pdf_file.read()))
                 doc = fitz.open(default_storage.path(path))
                 extracted_text = "\n".join([page.get_text() for page in doc])
-                ScrapedData.objects.create(
+                latest_scraped_data = ScrapedData.objects.create(
                     user=request.user,
                     source_name=pdf_file.name,
                     content=extracted_text
@@ -183,7 +184,7 @@ def scrape_data(request):
                 path = default_storage.save(docx_file.name, ContentFile(docx_file.read()))
                 extracted_data = extract_docx_to_df(default_storage.path(path))
                 for item in extracted_data:
-                    ScrapedData.objects.create(
+                    latest_scraped_data = ScrapedData.objects.create(
                         user=request.user,
                         source_name=docx_file.name,
                         content=f"Q: {item.get('question', 'N/A')}\nA: {item.get('answer', 'N/A')}",
@@ -195,20 +196,15 @@ def scrape_data(request):
             else:
                 messages.error(request, "No valid input provided!")
 
-
         except Exception as e:
-
             logger.error(f"Scraping failed: {e}", exc_info=True)
-
             messages.error(request, "Something went wrong. Please try again.")
 
-    # Fetch the scraped data for the logged-in user
-    user_data = ScrapedData.objects.filter(user=request.user)
+    # Fetch only the latest scraped data for the logged-in user
+    latest_scraped_data = ScrapedData.objects.filter(user=request.user).order_by('-created_at').first()
 
-    return render(request, "index.html", {"data": user_data})
+    return render(request, "index.html", {"data": [latest_scraped_data] if latest_scraped_data else []})
 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
 
 @login_required(login_url='/login/')  # Redirect to your custom login page
 def user_scraped_data(request):

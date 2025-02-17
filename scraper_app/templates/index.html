@@ -6,6 +6,7 @@
 <div class="page-container">
     <!-- Form Section -->
     <div class="container form-container">
+<<<<<<< HEAD
         <h2 class="form-title"> Scrape Data from Website or PDF</h2>
 
         <form method="post" enctype="multipart/form-data">
@@ -30,16 +31,47 @@
 
 
             <button type="submit" class="btn btn-primary btn-lg btn-custom mt-3"> Scrape Now</button>
+=======
+        <h2>Scrape Data from Website or PDF</h2>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="url" class="input-label">🌐 Enter Website URL:</label>
+                <input type="text" name="url" id="url" class="form-control" placeholder="Enter Website URL">
+            </div><br>
+
+            <div class="form-group">
+                <label for="pdf" class="input-label">📄 Upload PDF:</label>
+                <input type="file" name="pdf" id="pdf" class="form-control">
+            </div><br>
+
+            <div class="form-group">
+                <label for="docx" class="input-label">📃 Upload DOCX:</label>
+                <input type="file" name="docx" id="docx" class="form-control">
+            </div><br>
+
+            <button type="submit" class="btn btn-custom"> Scrape Now</button>
+>>>>>>> 431351a99abc32c0420cd45b22f5b559603407bf
         </form>
 
         {% if user.is_authenticated %}
         <div class="export-buttons">
+<<<<<<< HEAD
             <a href="{% url 'export_csv' %}" class="btn btn-outline-success export-btn">📊 Export CSV</a>
             <a href="{% url 'export_json' %}" class="btn btn-outline-warning export-btn">📜 Export JSON</a>
             <a href="{% url 'export_excel' %}" class="btn btn-outline-info export-btn">📑 Export Excel</a>
         </div>
         {% else %}
         <p class="alert alert-danger text-center mt-3">⚠️ You must be logged in to export data.</p>
+=======
+            <a href="{% url 'export_csv' %}" class="btn btn-success export-btn">📊 Export CSV</a>
+            <a href="{% url 'export_json' %}" class="btn btn-warning export-btn">📜 Export JSON</a>
+            <a href="{% url 'export_excel' %}" class="btn btn-info export-btn">📑 Export Excel</a>
+        </div>
+        {% else %}
+        <p class="alert alert-danger text-center">⚠️ You must be logged in to export data.</p>
+>>>>>>> 431351a99abc32c0420cd45b22f5b559603407bf
         {% endif %}
     </div>
 </div>
@@ -47,11 +79,18 @@
 <!-- Scraped Data Table Section -->
 {% if data %}
 <div class="container table-container">
+<<<<<<< HEAD
     <h3 class="table-title">Extracted Data</h3>
     <div class="table-responsive">
         <table class="table table-hover table-bordered table-striped">
 
             <thead class="table-light">
+=======
+    <h3> Extracted Data</h3>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead>
+>>>>>>> 431351a99abc32c0420cd45b22f5b559603407bf
                 <tr>
                     <th>ID</th>
                     <th>Source Name</th>

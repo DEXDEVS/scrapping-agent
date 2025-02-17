@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Python bytecode files
 __pycache__/
 *.pyc
@@ -24,3 +25,5 @@ venv/
 # IDE files
 .idea/
 .vscode/
+=======
+>>>>>>> 431351a99abc32c0420cd45b22f5b559603407bf

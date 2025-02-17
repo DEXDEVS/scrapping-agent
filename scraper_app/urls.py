@@ -1,6 +1,14 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
-from .views import scrape_data, export_csv, export_json, export_excel, user_scraped_data, login_page, register, logout_page
+from .views import (
+    scrape_data,
+    export_csv,
+    export_json,
+    export_excel,
+    login_page,
+    register,
+    logout_page
+)
 
 urlpatterns = [
     path('', scrape_data, name='scrape_data'),

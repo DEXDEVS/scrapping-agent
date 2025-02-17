@@ -1,48 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>register</title>
-    <!-- MDBootstrap CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
-         {% csrf_token %}
-            <h2 class="text-center">Register</h2>
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <div class="card p-4 shadow-lg" style="max-width: 500px; width: 100%;">
+        <h2 class="text-center text-primary fw-bold">Register</h2>
         <hr>
-            {% if messages %}
-            <div class="alert alert-primary" role="alert">
-                {% for message in messages %}
-             {{ message }}
-                {% endfor %}
-            </div>
-            {% endif %}
+
+        {% if messages %}
+        <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
 
             <div class="mb-3">
-                <label for="xyz" class="form-label">First name</label>
-                <input type="text" class="form-control" name="first_name" id="xyz" required>
+                <label class="form-label fw-bold">First Name</label>
+                <input type="text" class="form-control" name="first_name" required pattern="^[A-Za-z]+$" title="First name should only contain letters">
             </div>
+
             <div class="mb-3">
-                <label for="xyz" class="form-label">Last name</label>
-                <input type="text" class="form-control" name="last_name" id="xyz" required>
+                <label class="form-label fw-bold">Last Name</label>
+                <input type="text" class="form-control" name="last_name" required pattern="^[A-Za-z]+$" title="Last name should only contain letters">
             </div>
+
             <div class="mb-3">
-                <label for="xyz" class="form-label">Username</label>
-                <input type="text" class="form-control" name="username" id="xyz" required>
+                <label class="form-label fw-bold">Username</label>
+                <input type="text" class="form-control" name="username" required pattern="^[a-zA-Z0-9]+$" title="Username should only contain alphanumeric characters">
             </div>
+
             <div class="mb-3">
-                <label for="xyz" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" id="xyz" required>
+                <label class="form-label fw-bold">Password</label>
+                <input type="password" class="form-control" name="password" required minlength="6" title="Password must be at least 6 characters long">
             </div>
-          <p>Already have account <a href="/login/">Login</a></p>
-        <button type="submit" class="btn btn-primary w-100">submit</button>
+
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Register</button>
         </form>
-    </div>
 
-    <!-- MDBootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
-</body>
-</html>
+        <p class="text-center mt-3">Already have an account? <a href="/login/" class="text-primary fw-bold">Login</a></p>
+    </div>
+</div>
+{% endblock %}

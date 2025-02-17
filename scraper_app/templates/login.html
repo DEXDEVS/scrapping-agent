@@ -1,40 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <!-- MDBootstrap CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
-         {% csrf_token %}
-            <h2 class="text-center">Login</h2>
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-4 shadow-lg" style="max-width: 450px; width: 100%;">
+        <h2 class="text-center text-primary fw-bold">Login</h2>
         <hr>
-            {% if messages %}
-            <div class="alert alert-primary" role="alert">
-                {% for message in messages %}
-             {{ message }}
-                {% endfor %}
+
+        {% if messages %}
+        <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="loginEmail" class="form-label fw-bold">Username</label>
+                <input type="text" class="form-control" name="username" id="loginEmail" required pattern="^[a-zA-Z0-9]+$" title="Only alphanumeric characters allowed">
             </div>
-            {% endif %}
 
-<div class="mb-3">
-    <label for="loginEmail" class="form-label">Username</label>
-    <input type="text" class="form-control" name="username" id="loginEmail" required>
-</div>
-<div class="mb-3">
-    <label for="loginPassword" class="form-label">Password</label>
-    <input type="password" class="form-control" name="password" id="loginPassword" required>
-</div>
-         <p>Dont have account <a href="/register/">Register</a></p>
-        <button type="submit" class="btn btn-primary w-100">submit</button>
+            <div class="mb-3">
+                <label for="loginPassword" class="form-label fw-bold">Password</label>
+                <input type="password" class="form-control" name="password" id="loginPassword" required minlength="6" title="Password must be at least 6 characters long">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Login</button>
         </form>
-    </div>
 
-    <!-- MDBootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
-</body>
-</html>
+        <p class="text-center mt-3">Don't have an account? <a href="/register/" class="text-primary fw-bold">Register</a></p>
+    </div>
+</div>
+{% endblock %}

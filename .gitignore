@@ -1,13 +1,26 @@
-# Virtual environment
-.venv/
-env/
-
-# Ignore Python cache
+# Python bytecode files
 __pycache__/
 *.pyc
+*.pyo
 
-# Database file (optional if using SQLite)
-db.sqlite3
+# Django migrations
 
-# Ignore Django migrations compiled files
-*/migrations/*.pyc
+
+# Django database
+
+
+# Log files
+*.log
+
+# Media and static files
+/media/
+*.log
+*.bak
+
+# Virtual environment
+venv/
+.env/
+
+# IDE files
+.idea/
+.vscode/

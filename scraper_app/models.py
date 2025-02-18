@@ -9,6 +9,7 @@ class ScrapedData(models.Model):
     question = models.TextField(null=True, blank=True)
     answer = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)  # Track extraction time
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.source_name} - {self.user.username if self.user else 'No User'}"

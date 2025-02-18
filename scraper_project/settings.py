@@ -139,4 +139,23 @@ AUTHENTICATION_BACKENDS = [
 
 # AUTH_USER_MODEL = 'scraper_app.CustomUser'
 
+import os
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'errors.log'),  # Save errors in errors.log
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}

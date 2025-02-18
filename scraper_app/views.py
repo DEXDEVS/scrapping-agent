@@ -16,7 +16,15 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+import re
+from django.shortcuts import get_object_or_404
 
+
+@login_required(login_url='/login/')
+def delete_data(request, data_id):
+    data_entry = get_object_or_404(ScrapedData, id=data_id, user=request.user)
+    data_entry.delete()
+    return redirect('/')
 
 def login_page(request):
     if request.method == "POST":
@@ -27,20 +35,17 @@ def login_page(request):
             messages.error(request, "Invalid Username")
             return redirect("/login/")
 
-        # Authenticate user
         user = authenticate(request, username=username, password=password)
 
         if user is None:
             messages.error(request, "Invalid password")
-            return redirect("/login/")  # Redirect to login page
+            return redirect("/login/")
 
-        # Log the user in
         login(request, user)
-        messages.success(request, "Login Successful!")
+
         return redirect("/")
 
     return render(request, "login.html")
-
 
 def register(request):
     if request.method == "POST":
@@ -53,19 +58,16 @@ def register(request):
             messages.error(request, "Username already exists")
             return redirect('/register/')
 
-        # Corrected: Pass password directly in create_user
         user = User.objects.create_user(
             first_name=first_name,
             last_name=last_name,
             username=username,
-            password=password  # This ensures password is hashed
+            password=password
         )
 
-        messages.success(request, "Registration successful! Please log in.")
         return redirect('/login/')
 
     return render(request, 'register.html')
-
 
 def logout_page(request):
     logout(request)
@@ -75,7 +77,7 @@ def logout_page(request):
 def export_csv(request):
     try:
         recent_data = ScrapedData.objects.filter(user=request.user)
-        if not recent_data.exists():
+        if not recent_data:
             return HttpResponse("No data found", status=404)
 
         response = HttpResponse(content_type="text/csv")
@@ -91,14 +93,13 @@ def export_csv(request):
         logger.error(f"CSV export failed: {e}", exc_info=True)
         return HttpResponse("Error occurred", status=500)
 
-
 @login_required(login_url='/login/')
 def export_json(request):
     try:
         recent_data = ScrapedData.objects.filter(user=request.user).values(
             'source_name', 'content', 'question', 'answer'
         )
-        if not recent_data.exists():
+        if not recent_data:
             return HttpResponse("No data found", status=404)
 
         response = HttpResponse(json.dumps(list(recent_data), indent=4), content_type='application/json')
@@ -129,8 +130,6 @@ def export_excel(request):
         logger.error(f"Excel export failed: {e}", exc_info=True)
         return HttpResponse("Error occurred", status=500)
 
-
-# Configure logging
 logger = logging.getLogger("django")
 
 def extract_docx_to_df(file_path):
@@ -144,8 +143,13 @@ def extract_docx_to_df(file_path):
         data.append({"question": question, "answer": answer})
     return data
 
+
+
+
 @login_required(login_url='/login/')
 def scrape_data(request):
+    latest_scraped_data = None
+
     if request.method == "POST":
         if not request.user.is_authenticated:
             messages.error(request, "You must be logged in to extract data.")
@@ -156,34 +160,50 @@ def scrape_data(request):
         docx_file = request.FILES.get("docx")
 
         try:
+            # Validate URL
             if url:
+                url_pattern = re.compile(r"https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+")
+                if not url_pattern.match(url):
+                    messages.error(request, "Invalid URL format!")
+                    return redirect("/")
+
                 response = requests.get(url)
                 if response.status_code == 200:
                     soup = BeautifulSoup(response.content, 'html.parser')
                     extracted_text = '\n'.join(p.get_text() for p in soup.find_all('p'))
-                    ScrapedData.objects.create(
+                    latest_scraped_data = ScrapedData.objects.create(
                         user=request.user,
                         source_name=url,
                         content=extracted_text
                     )
                     messages.success(request, "Website data scraped successfully!")
 
+            # Validate PDF File
             elif pdf_file:
+                if not pdf_file.name.endswith(".pdf"):
+                    messages.error(request, "Invalid file format! Please upload a PDF file.")
+                    return redirect("/")
+
                 path = default_storage.save(pdf_file.name, ContentFile(pdf_file.read()))
                 doc = fitz.open(default_storage.path(path))
                 extracted_text = "\n".join([page.get_text() for page in doc])
-                ScrapedData.objects.create(
+                latest_scraped_data = ScrapedData.objects.create(
                     user=request.user,
                     source_name=pdf_file.name,
                     content=extracted_text
                 )
                 messages.success(request, "PDF data scraped successfully!")
 
+            # Validate DOCX File
             elif docx_file:
+                if not docx_file.name.endswith(".docx"):
+                    messages.error(request, "Invalid file format! Please upload a DOCX file.")
+                    return redirect("/")
+
                 path = default_storage.save(docx_file.name, ContentFile(docx_file.read()))
                 extracted_data = extract_docx_to_df(default_storage.path(path))
                 for item in extracted_data:
-                    ScrapedData.objects.create(
+                    latest_scraped_data = ScrapedData.objects.create(
                         user=request.user,
                         source_name=docx_file.name,
                         content=f"Q: {item.get('question', 'N/A')}\nA: {item.get('answer', 'N/A')}",
@@ -194,23 +214,10 @@ def scrape_data(request):
 
             else:
                 messages.error(request, "No valid input provided!")
-
-
         except Exception as e:
-
             logger.error(f"Scraping failed: {e}", exc_info=True)
-
             messages.error(request, "Something went wrong. Please try again.")
 
-    # Fetch the scraped data for the logged-in user
-    user_data = ScrapedData.objects.filter(user=request.user)
+    scraped_data = ScrapedData.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, "index.html", {"data": scraped_data})
 
-    return render(request, "index.html", {"data": user_data})
-
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
-
-@login_required(login_url='/login/')  # Redirect to your custom login page
-def user_scraped_data(request):
-    data = ScrapedData.objects.filter(user=request.user)
-    return render(request, "user_scraped_data.html", {"data": data})

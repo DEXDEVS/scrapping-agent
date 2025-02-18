@@ -9,7 +9,6 @@ body {
     flex-direction: column;
     align-items: center;
     background-color: #cce6f0;
-<<<<<<< HEAD
 }
 
 /* Centering the Form */
@@ -34,15 +33,23 @@ body {
     margin-bottom: 5px;
     margin-top: 20px;
 }
-
-.form-container h2 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-    color: #007bff;
+/* Title Styling */
+.form-container h2, .table-title {
+    font-size: 3.1rem;
+    margin-bottom: 25px;
+    color: #3E92CC; /* Primary color */
     text-align: center;
-    font-weight: bold;
-    font: italic;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(45deg, #3E92CC, #FF6347); /* Gradient with primary and secondary colors */
+    -webkit-background-clip: text;
+    color: transparent;
+    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+    padding: 10px 0;
+    background-color: #F1F6F9;
 }
+
 
 .input-label {
     font-weight: bold;
@@ -114,18 +121,12 @@ body {
     overflow-x: auto;
 }
 
-/* Table Title */
-.table-title {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    color: #007bff;
-}
 
-/* Updated Table Header */
+
+/* Table Header */
 .table thead {
-    background: #007bff; /* Match Navbar Blue */
-    color: black;
+    background: #007bff;
+    color: #ffffff;
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -134,12 +135,36 @@ body {
 .table thead th {
     padding: 12px;
     border: none;
+    color: #000000;  /* Changed color to black */
 }
 
 /* Table Rows */
 .table tbody tr:hover {
     background: #f1f1f1;
     transition: all 0.3s ease-in-out;
+}
+
+.table tbody td {
+    padding: 12px;
+    vertical-align: middle;
+}
+
+.table tbody td, .table thead th {
+    border-bottom: 1px solid #ddd;
+}
+
+/* Delete Button */
+.table tbody td form button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.table tbody td form button:hover {
+    background-color: #c82333;
 }
 
 /* Navbar Styling */
@@ -165,145 +190,6 @@ body {
         padding: 12px;
     }
 
-=======
-}
-
-/* Centering the Form */
-.page-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh; /* Ensures full-page height */
-    width: 100%;
-}
-
-/* Form Styling */
-.form-container {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 20px; /* Increased padding for a larger form */
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 800px; /* Increased width */
-    text-align: left;
-    margin-bottom: 5px; /* Reduced space below the form */
-    margin-top: 10px; /* Adjusted spacing from the top */
-}
-
-.form-container h2 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-    color: #007bff;
-    text-align: center;
-}
-
-.input-label {
-    font-weight: bold;
-    font-size: 1rem;
-    margin-bottom: 8px;
-}
-
-.form-control {
-    border-radius: 8px;
-    font-size: 1.2rem; /* Slightly larger input fields */
-    padding: 10px;
-    width: 100%;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-}
-
-.form-control:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-/* Button Styling */
-.btn-custom {
-    background-color: #007bff;
-    color: white;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1.2rem;
-    padding: 14px;
-    width: 100%;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.btn-custom:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-    color: white;
-}
-
-/* Export Buttons */
-.export-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 10px; /* Reduced space between form and buttons */
-}
-
-.export-btn {
-    font-weight: bold;
-    font-size: 1rem;
-    transition: all 0.3s ease-in-out;
-}
-
-.export-btn:hover {
-    transform: scale(1.1);
-}
-
-/* Table Styling */
-.table-container {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 95%;
-    margin-top: 5px; /* Reduced space between form and table */
-    overflow-x: auto; /* Ensures table is scrollable on small screens */
-}
-
-.table-container h3 {
-    text-align: center;
-    color: #343a40;
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-}
-
-.table {
-    width: 100%;
-    text-align: center;
-    border-radius: 8px;
-}
-
-.table thead {
-    background: #343a40;
-    color: white;
-}
-
-.table tbody tr:hover {
-    background: #f1f1f1;
-    transition: all 0.3s ease-in-out;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .form-container {
-        width: 95%;
-        max-width: 600px; /* Increased form size for smaller screens */
-    }
-
-    .btn-custom {
-        font-size: 1.1rem;
-        padding: 12px;
-    }
-
->>>>>>> 431351a99abc32c0420cd45b22f5b559603407bf
     .table-container {
         max-width: 98%;
     }

@@ -1,126 +1,71 @@
-Scraping failed: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
+Internal Server Error: /login/
 Traceback (most recent call last):
-  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 161, in scrape_data
-    response = requests.get(url)
-               ^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 73, in get
-    return request("get", url, params=params, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 575, in request
-    prep = self.prepare_request(req)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 484, in prepare_request
-    p.prepare(
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 367, in prepare
-    self.prepare_url(url, params)
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 438, in prepare_url
-    raise MissingSchema(
-requests.exceptions.MissingSchema: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
-Scraping failed: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 46, in login_page
+    return redirect(request, "/")
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\shortcuts.py", line 49, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\shortcuts.py", line 180, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for '<WSGIRequest: POST '/login/'>' not found. '<WSGIRequest: POST '/login/'>' is not a valid view function or pattern name.
+"POST /login/ HTTP/1.1" 500 86729
+Internal Server Error: /login/
 Traceback (most recent call last):
-  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 161, in scrape_data
-    response = requests.get(url)
-               ^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 73, in get
-    return request("get", url, params=params, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 575, in request
-    prep = self.prepare_request(req)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 484, in prepare_request
-    p.prepare(
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 367, in prepare
-    self.prepare_url(url, params)
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 438, in prepare_url
-    raise MissingSchema(
-requests.exceptions.MissingSchema: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
-Scraping failed: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 47, in login_page
+    return redirect(request, "login.html")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\shortcuts.py", line 49, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\shortcuts.py", line 180, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for '<WSGIRequest: GET '/login/'>' not found. '<WSGIRequest: GET '/login/'>' is not a valid view function or pattern name.
+Internal Server Error: /login/
 Traceback (most recent call last):
-  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 161, in scrape_data
-    response = requests.get(url)
-               ^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 73, in get
-    return request("get", url, params=params, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 575, in request
-    prep = self.prepare_request(req)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 484, in prepare_request
-    p.prepare(
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 367, in prepare
-    self.prepare_url(url, params)
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 438, in prepare_url
-    raise MissingSchema(
-requests.exceptions.MissingSchema: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
-Scraping failed: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
-Traceback (most recent call last):
-  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 161, in scrape_data
-    response = requests.get(url)
-               ^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 73, in get
-    return request("get", url, params=params, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 575, in request
-    prep = self.prepare_request(req)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 484, in prepare_request
-    p.prepare(
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 367, in prepare
-    self.prepare_url(url, params)
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 438, in prepare_url
-    raise MissingSchema(
-requests.exceptions.MissingSchema: Invalid URL '....': No scheme supplied. Perhaps you meant https://....?
-Scraping failed: Invalid URL '.....': No scheme supplied. Perhaps you meant https://.....?
-Traceback (most recent call last):
-  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 161, in scrape_data
-    response = requests.get(url)
-               ^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 73, in get
-    return request("get", url, params=params, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 575, in request
-    prep = self.prepare_request(req)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 484, in prepare_request
-    p.prepare(
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 367, in prepare
-    self.prepare_url(url, params)
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 438, in prepare_url
-    raise MissingSchema(
-requests.exceptions.MissingSchema: Invalid URL '.....': No scheme supplied. Perhaps you meant https://.....?
-Scraping failed: Invalid URL '.....': No scheme supplied. Perhaps you meant https://.....?
-Traceback (most recent call last):
-  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 161, in scrape_data
-    response = requests.get(url)
-               ^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 73, in get
-    return request("get", url, params=params, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\api.py", line 59, in request
-    return session.request(method=method, url=url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 575, in request
-    prep = self.prepare_request(req)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\sessions.py", line 484, in prepare_request
-    p.prepare(
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 367, in prepare
-    self.prepare_url(url, params)
-  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\requests\models.py", line 438, in prepare_url
-    raise MissingSchema(
-requests.exceptions.MissingSchema: Invalid URL '.....': No scheme supplied. Perhaps you meant https://.....?
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\scraper_app\views.py", line 47, in login_page
+    return redirect(request, "login.html")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\shortcuts.py", line 49, in redirect
+    return redirect_class(resolve_url(to, *args, **kwargs))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\shortcuts.py", line 180, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\web scraping\scrapping-agent\.venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for '<WSGIRequest: GET '/login/'>' not found. '<WSGIRequest: GET '/login/'>' is not a valid view function or pattern name.
+"GET /login/ HTTP/1.1" 500 85546

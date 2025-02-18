@@ -16,6 +16,15 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+import re
+from django.shortcuts import get_object_or_404
+
+
+@login_required(login_url='/login/')
+def delete_data(request, data_id):
+    data_entry = get_object_or_404(ScrapedData, id=data_id, user=request.user)
+    data_entry.delete()
+    return redirect('/')
 
 def login_page(request):
     if request.method == "POST":
@@ -33,7 +42,7 @@ def login_page(request):
             return redirect("/login/")
 
         login(request, user)
-        messages.success(request, "Login Successful!")
+
         return redirect("/")
 
     return render(request, "login.html")
@@ -56,7 +65,6 @@ def register(request):
             password=password
         )
 
-        messages.success(request, "Registration successful! Please log in.")
         return redirect('/login/')
 
     return render(request, 'register.html')
@@ -136,17 +144,11 @@ def extract_docx_to_df(file_path):
     return data
 
 
-import re
-from django.core.exceptions import ValidationError
 
 
 @login_required(login_url='/login/')
 def scrape_data(request):
-<<<<<<< HEAD
     latest_scraped_data = None
-=======
-    latest_scraped_data = None  # Initialize variable for storing the most recent entry
->>>>>>> 431351a99abc32c0420cd45b22f5b559603407bf
 
     if request.method == "POST":
         if not request.user.is_authenticated:
@@ -212,27 +214,10 @@ def scrape_data(request):
 
             else:
                 messages.error(request, "No valid input provided!")
-<<<<<<< HEAD
-=======
-
->>>>>>> 431351a99abc32c0420cd45b22f5b559603407bf
         except Exception as e:
             logger.error(f"Scraping failed: {e}", exc_info=True)
             messages.error(request, "Something went wrong. Please try again.")
 
-<<<<<<< HEAD
     scraped_data = ScrapedData.objects.filter(user=request.user).order_by('-created_at')
     return render(request, "index.html", {"data": scraped_data})
 
-=======
-    # Fetch only the latest scraped data for the logged-in user
-    latest_scraped_data = ScrapedData.objects.filter(user=request.user).order_by('-created_at').first()
-
-    return render(request, "index.html", {"data": [latest_scraped_data] if latest_scraped_data else []})
-
-
-@login_required(login_url='/login/')  # Redirect to your custom login page
-def user_scraped_data(request):
-    data = ScrapedData.objects.filter(user=request.user)
-    return render(request, "user_scraped_data.html", {"data": data})
->>>>>>> 431351a99abc32c0420cd45b22f5b559603407bf

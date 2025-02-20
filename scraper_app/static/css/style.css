@@ -5,125 +5,47 @@ body {
     font-family: 'Arial', sans-serif;
     color: #000;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding-top: 70px; /* Ensures content is not hidden under navbar */
     background-color: #cce6f0;
 }
 
-/* Centering the Form */
+/* Align the form container properly */
 .page-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh; /* Ensures full-page height */
-    width: 100%;
+    justify-content: flex-start;
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 20px;
 }
 
-/* Form Styling */
+/* Form Container - Well Balanced */
 .form-container {
     background: rgba(255, 255, 255, 0.95);
-    padding: 20px;
+    padding: 30px;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 800px;
+    width: 85%;
+    max-width: 550px;
     text-align: left;
-    margin-bottom: 5px;
-    margin-top: 20px;
-}
-/* Title Styling */
-.form-container h2, .table-title {
-    font-size: 3.1rem;
-    margin-bottom: 25px;
-    color: #3E92CC; /* Primary color */
-    text-align: center;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    background: linear-gradient(45deg, #3E92CC, #FF6347); /* Gradient with primary and secondary colors */
-    -webkit-background-clip: text;
-    color: transparent;
-    box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
-    padding: 10px 0;
-    background-color: #F1F6F9;
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
 
-
-.input-label {
-    font-weight: bold;
-    font-size: 1rem;
-    margin-bottom: 8px;
-}
-
-.form-control {
-    border-radius: 8px;
-    font-size: 1.2rem;
-    padding: 10px;
-    width: 100%;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-}
-
-.form-control:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-/* Button Styling */
-.btn-custom {
-    background-color: #007bff;
-    color: white;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1.2rem;
-    padding: 14px;
-    width: 100%;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.btn-custom:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-    color: white;
-}
-
-/* Export Buttons */
-.export-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.export-btn {
-    font-weight: bold;
-    font-size: 1rem;
-    transition: all 0.3s ease-in-out;
-}
-
-.export-btn:hover {
-    transform: scale(1.1);
-}
-
-/* Table Styling */
+/* Table Container - More Readable & Professional */
 .table-container {
     background: white;
-    padding: 20px;
+    padding: 25px;
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 95%;
-    margin-top: 10px;
+    width: 85%;
+    max-width: 90%;
+    margin: 40px auto; /* Adjusted margins */
     overflow-x: auto;
 }
 
-
-
-/* Table Header */
+/* Table Styling - Improved Readability */
 .table thead {
     background: #007bff;
     color: #ffffff;
@@ -131,71 +53,55 @@ body {
     text-transform: uppercase;
 }
 
-/* Table Header Cells */
 .table thead th {
-    padding: 12px;
+    padding: 14px;
     border: none;
-    color: #000000;  /* Changed color to black */
 }
 
-/* Table Rows */
 .table tbody tr:hover {
-    background: #f1f1f1;
+    background: #eaf2ff;
     transition: all 0.3s ease-in-out;
 }
 
 .table tbody td {
-    padding: 12px;
+    padding: 14px;
     vertical-align: middle;
 }
 
-.table tbody td, .table thead th {
-    border-bottom: 1px solid #ddd;
+/* Filter Icon - Lighter Color & Proper Alignment */
+th i.bi-funnel-fill {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 1rem;
+    margin-left: 5px;
 }
 
-/* Delete Button */
-.table tbody td form button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.table tbody td form button:hover {
-    background-color: #c82333;
-}
-
-/* Navbar Styling */
+/* Ensure navbar sticks properly */
 .navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
     background-color: #007bff !important;
+    padding: 15px;
 }
 
 .navbar .navbar-brand {
     font-weight: bold;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
 }
 
-/* Responsive Design */
+/* Responsive Design Enhancements */
 @media (max-width: 768px) {
-    .form-container {
-        width: 95%;
-        max-width: 600px;
+    .page-container {
+        width: 90%;
+        margin: 80px auto; /* Adjusted for smaller screens */
     }
 
-    .btn-custom {
-        font-size: 1.1rem;
-        padding: 12px;
-    }
-
+    .form-container,
     .table-container {
-        max-width: 98%;
-    }
-
-    .export-buttons {
-        flex-direction: column;
-        gap: 10px;
+        width: 95%;
+        margin-bottom: 20px;
     }
 }

@@ -3,13 +3,14 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<div class="container d-flex justify-content-center align-items-center min-vh-100" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-    <div class="card p-4 shadow-lg" style="max-width: 500px; width: 100%;">
+<br><br>
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card p-2 shadow-lg" style="max-width: 400px; width: 100%;">
         <h2 class="text-center text-primary fw-bold">Register</h2>
         <hr>
 
         {% if messages %}
-        <div class="alert alert-primary" role="alert">
+        <div class="alert alert-primary p-2" role="alert">
             {% for message in messages %}
                 {{ message }}
             {% endfor %}
@@ -19,30 +20,30 @@
         <form method="post">
             {% csrf_token %}
 
-            <div class="mb-3">
+            <div class="mb-2">
                 <label class="form-label fw-bold">First Name</label>
-                <input type="text" class="form-control" name="first_name" required pattern="^[A-Za-z]+$" title="First name should only contain letters">
+                <input type="text" class="form-control" name="first_name" required>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-2">
                 <label class="form-label fw-bold">Last Name</label>
-                <input type="text" class="form-control" name="last_name" required pattern="^[A-Za-z]+$" title="Last name should only contain letters">
+                <input type="text" class="form-control" name="last_name" required>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-2">
                 <label class="form-label fw-bold">Username</label>
-                <input type="text" class="form-control" name="username" required pattern="^[a-zA-Z0-9]+$" title="Username should only contain alphanumeric characters">
+                <input type="text" class="form-control" name="username" required>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-2">
                 <label class="form-label fw-bold">Password</label>
-                <input type="password" class="form-control" name="password" required minlength="6" title="Password must be at least 6 characters long">
+                <input type="password" class="form-control" name="password" required>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Register</button>
+            <button type="submit" class="btn btn-primary w-100 py-1 fw-bold">Register</button>
         </form>
 
-        <p class="text-center mt-3">Already have an account? <a href="/login/" class="text-primary fw-bold">Login</a></p>
+        <p class="text-center mt-2">Already have an account? <a href="/login/" class="text-primary fw-bold">Login</a></p>
     </div>
 </div>
 {% endblock %}

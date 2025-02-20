@@ -1,14 +1,12 @@
 /* Full-Screen Background */
 body {
-    background: url('') no-repeat center center fixed;
-    background-size: cover;
     font-family: 'Arial', sans-serif;
-    color: #000;
+    color: #333333; /* Dark Gray Text for better readability */
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #cce6f0;
+    background-color: #F1F6F9; /* Soft light background */
 }
 
 /* Centering the Form */
@@ -17,7 +15,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh; /* Ensures full-page height */
+    min-height: 100vh;
     width: 100%;
 }
 
@@ -33,6 +31,7 @@ body {
     margin-bottom: 5px;
     margin-top: 20px;
 }
+
 /* Title Styling */
 .form-container h2, .table-title {
     font-size: 3.1rem;
@@ -50,7 +49,7 @@ body {
     background-color: #F1F6F9;
 }
 
-
+/* Input Styling */
 .input-label {
     font-weight: bold;
     font-size: 1rem;
@@ -67,14 +66,13 @@ body {
 }
 
 .form-control:focus {
-    border-color: #007bff;
     outline: none;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 5px 2px #3E92CC; /* Adds a soft blue glow */
 }
 
 /* Button Styling */
 .btn-custom {
-    background-color: #007bff;
+    background-color: #3E92CC; /* Primary color */
     color: white;
     border-radius: 8px;
     font-weight: bold;
@@ -86,10 +84,11 @@ body {
 }
 
 .btn-custom:hover {
-    background-color: #0056b3;
+    background-color: #2B6CB0; /* Slightly darker blue */
     transform: translateY(-2px);
     color: white;
 }
+
 
 /* Export Buttons */
 .export-buttons {
@@ -103,10 +102,12 @@ body {
     font-weight: bold;
     font-size: 1rem;
     transition: all 0.3s ease-in-out;
+    color: #3E92CC; /* Primary color */
 }
 
 .export-btn:hover {
     transform: scale(1.1);
+    color: white; /* Secondary color on hover */
 }
 
 /* Table Styling */
@@ -121,11 +122,9 @@ body {
     overflow-x: auto;
 }
 
-
-
 /* Table Header */
 .table thead {
-    background: #007bff;
+    background: #3E92CC; /* Primary color */
     color: #ffffff;
     font-weight: bold;
     text-transform: uppercase;
@@ -135,12 +134,12 @@ body {
 .table thead th {
     padding: 12px;
     border: none;
-    color: #000000;  /* Changed color to black */
+    color: #2B6CB0;
 }
 
 /* Table Rows */
 .table tbody tr:hover {
-    background: #f1f1f1;
+    background: #F1F6F9; /* Light gray background on hover */
     transition: all 0.3s ease-in-out;
 }
 
@@ -169,7 +168,7 @@ body {
 
 /* Navbar Styling */
 .navbar {
-    background-color: #007bff !important;
+    background-color: #3E92CC !important; /* Primary color */
 }
 
 .navbar .navbar-brand {

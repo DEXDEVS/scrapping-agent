@@ -3,14 +3,13 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<br><br>
-<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-    <div class="card p-2 shadow-lg" style="max-width: 400px; width: 100%;">
-        <h2 class="text-center text-primary fw-bold">Register</h2>
-        <hr>
+<br>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh; margin-top: 30px;">
+    <div class="card p-2 shadow-lg" style="max-width: 340px; width: 100%; background-color: #F1F6F9; border-radius: 10px;">
+        <h2 class="text-center fw-bold" style="color: #3E92CC; font-size: 1.8rem; margin-bottom: 10px;">Register</h2>
 
         {% if messages %}
-        <div class="alert alert-primary p-2" role="alert">
+        <div class="alert alert-info p-2" style="background-color: #3E92CC; color: white;" role="alert">
             {% for message in messages %}
                 {{ message }}
             {% endfor %}
@@ -21,29 +20,38 @@
             {% csrf_token %}
 
             <div class="mb-2">
-                <label class="form-label fw-bold">First Name</label>
-                <input type="text" class="form-control" name="first_name" required>
+                <label class="form-label fw-bold" style="color: #3E92CC; font-size: 0.9rem;">First Name</label>
+                <input type="text" class="form-control form-control-sm" name="first_name" required
+                    style="border: 1px solid #3E92CC; border-radius: 6px; padding: 6px;">
             </div>
 
             <div class="mb-2">
-                <label class="form-label fw-bold">Last Name</label>
-                <input type="text" class="form-control" name="last_name" required>
+                <label class="form-label fw-bold" style="color: #3E92CC; font-size: 0.9rem;">Last Name</label>
+                <input type="text" class="form-control form-control-sm" name="last_name" required
+                    style="border: 1px solid #3E92CC; border-radius: 6px; padding: 6px;">
             </div>
 
             <div class="mb-2">
-                <label class="form-label fw-bold">Username</label>
-                <input type="text" class="form-control" name="username" required>
+                <label class="form-label fw-bold" style="color: #3E92CC; font-size: 0.9rem;">Username</label>
+                <input type="text" class="form-control form-control-sm" name="username" required
+                    style="border: 1px solid #3E92CC; border-radius: 6px; padding: 6px;">
             </div>
 
             <div class="mb-2">
-                <label class="form-label fw-bold">Password</label>
-                <input type="password" class="form-control" name="password" required>
+                <label class="form-label fw-bold" style="color: #3E92CC; font-size: 0.9rem;">Password</label>
+                <input type="password" class="form-control form-control-sm" name="password" required
+                    style="border: 1px solid #3E92CC; border-radius: 6px; padding: 6px;">
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 py-1 fw-bold">Register</button>
+            <button type="submit" class="btn w-100 py-1 fw-bold"
+                style="background-color: #3E92CC; color: white; border-radius: 6px; font-size: 1rem;">
+                Register
+            </button>
         </form>
 
-        <p class="text-center mt-2">Already have an account? <a href="/login/" class="text-primary fw-bold">Login</a></p>
+        <p class="text-center mt-2" style="font-size: 0.9rem;">Already have an account?
+            <a href="/login/" style="color: #FF6347; font-weight: bold;">Login</a>
+        </p>
     </div>
 </div>
 {% endblock %}

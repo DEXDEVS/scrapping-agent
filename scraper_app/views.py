@@ -203,12 +203,8 @@ def scrape_data(request):
                     else:
                         messages.error(request, "Not scraped data from this URL.")
 
-            # Validate PDF File
+            # PDF file processing
             elif pdf_file:
-                if not pdf_file.name.endswith(".pdf"):
-                    messages.error(request, "Invalid file format! Please upload a PDF file.")
-                    return redirect("/")
-
                 path = default_storage.save(pdf_file.name, ContentFile(pdf_file.read()))
                 doc = fitz.open(default_storage.path(path))
                 extracted_text = "\n".join([page.get_text() for page in doc])
@@ -217,14 +213,11 @@ def scrape_data(request):
                     source_name=pdf_file.name,
                     content=extracted_text
                 )
+                os.remove(default_storage.path(path))  # File delete after processing
                 messages.success(request, "PDF data scraped successfully!")
 
-            # Validate DOCX File
+            # DOCX file processing
             elif docx_file:
-                if not docx_file.name.endswith(".docx"):
-                    messages.error(request, "Invalid file format! Please upload a DOCX file.")
-                    return redirect("/")
-
                 path = default_storage.save(docx_file.name, ContentFile(docx_file.read()))
                 extracted_data = extract_docx_to_df(default_storage.path(path))
                 for item in extracted_data:
@@ -235,6 +228,7 @@ def scrape_data(request):
                         question=item.get("question", "N/A"),
                         answer=item.get("answer", "N/A")
                     )
+                os.remove(default_storage.path(path))  # File delete after processing
                 messages.success(request, "DOCX data scraped successfully!")
 
             else:

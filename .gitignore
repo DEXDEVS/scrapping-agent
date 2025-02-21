@@ -1,16 +1,34 @@
-# Ignore database
-db.sqlite3
 
-# Ignore logs
-*.log
-
-# Ignore compiled Python files
+# Ignore Python bytecode files
 __pycache__/
-*.pyc
+*.py[cod]
 
-# Ignore Django static and media files
-/static/
-/media/
+# Virtual environment
+.venv/
+venv/
+env/
 
-# Ignore migration cache files
-migrations/__pycache__/
+# Ignore Django migrations (optional)
+migrations/*
+
+# Database files
+db.sqlite3
+*.sqlite3
+
+# Logs and error files
+*.log
+errors.log
+
+# Media uploads
+media/
+
+# PyCharm and VSCode project files
+.idea/
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore static files that are auto-generated (if applicable)
+staticfiles/

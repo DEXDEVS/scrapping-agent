@@ -4,12 +4,12 @@
 
 {% block content %}
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card p-4 shadow-lg" style="max-width: 450px; width: 100%;">
-        <h2 class="text-center text-primary fw-bold">Login</h2>
-        <hr>
+    <div class="card p-4 shadow-lg" style="max-width: 450px; width: 100%; background-color: #F1F6F9; border-radius: 12px;">
+        <h1 class="text-center fw-bold" style="color: #3E92CC;">Login</h1>
+        <hr style="border: 1px solid #3E92CC;">
 
         {% if messages %}
-        <div class="alert alert-primary" role="alert">
+        <div class="alert alert-info" style="background-color: #3E92CC; color: white;" role="alert">
             {% for message in messages %}
                 {{ message }}
             {% endfor %}
@@ -19,19 +19,26 @@
         <form method="post">
             {% csrf_token %}
             <div class="mb-3">
-                <label for="loginEmail" class="form-label fw-bold">Username</label>
-                <input type="text" class="form-control" name="username" id="loginEmail" required pattern="^[a-zA-Z0-9]+$" title="Only alphanumeric characters allowed">
+                <label for="loginEmail" class="form-label fw-bold" style="color: #3E92CC;">Username</label>
+                <input type="text" class="form-control" name="username" id="loginEmail" required pattern="^[a-zA-Z0-9]+$"
+                    title="Only alphanumeric characters allowed" style="border: 1px solid #3E92CC; border-radius: 8px;">
             </div>
 
             <div class="mb-3">
-                <label for="loginPassword" class="form-label fw-bold">Password</label>
-                <input type="password" class="form-control" name="password" id="loginPassword" required minlength="6" title="Password must be at least 6 characters long">
+                <label for="loginPassword" class="form-label fw-bold" style="color: #3E92CC;">Password</label>
+                <input type="password" class="form-control" name="password" id="loginPassword" required minlength="6"
+                    title="Password must be at least 6 characters long" style="border: 1px solid #3E92CC; border-radius: 8px;">
             </div>
 
-            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Login</button>
+            <button type="submit" class="btn w-100 py-2 fw-bold"
+                style="background-color: #3E92CC; color: white; border-radius: 8px; transition: 0.3s;">
+                Login
+            </button>
         </form>
 
-        <p class="text-center mt-3">Don't have an account? <a href="/register/" class="text-primary fw-bold">Register</a></p>
+        <p class="text-center mt-3">Don't have an account?
+            <a href="/register/" style="color: #FF6347; font-weight: bold;">Register</a>
+        </p>
     </div>
 </div>
 {% endblock %}

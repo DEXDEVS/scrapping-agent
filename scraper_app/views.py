@@ -19,6 +19,8 @@ from django.contrib.auth.decorators import login_required
 import re
 from django.shortcuts import get_object_or_404
 logger = logging.getLogger("django")
+from django.core.paginator import Paginator
+
 
 @login_required(login_url='/login/')
 def delete_data(request, data_id):
@@ -77,79 +79,86 @@ def logout_page(request):
 @login_required(login_url='/login/')
 def export_csv(request):
     try:
-        source_name = request.GET.get('source_name')
-        recent_data = ScrapedData.objects.filter(user=request.user)
-
-        if source_name:
-            recent_data = recent_data.filter(source_name=source_name)
+        selected_ids = request.GET.get('ids')
+        if selected_ids:
+            selected_ids = selected_ids.split(',')
+            recent_data = ScrapedData.objects.filter(id__in=selected_ids, user=request.user)
+        else:
+            recent_data = ScrapedData.objects.filter(user=request.user)
 
         if not recent_data.exists():
             return HttpResponse("No data found", status=404)
 
         response = HttpResponse(content_type="text/csv")
-        response['Content-Disposition'] = 'attachment; filename="filtered_scraped_data.csv"'
+        response['Content-Disposition'] = 'attachment; filename="scraped_data.csv"'
 
         writer = csv.writer(response)
-        writer.writerow(['Source Name', 'Content', 'Question', 'Answer'])
+        writer.writerow(['Source Name', 'Content', 'Question', 'Answer', 'Date'])
         for data in recent_data:
-            writer.writerow([data.source_name, data.content, data.question, data.answer])
+            writer.writerow([data.source_name, data.content, data.question, data.answer, data.created_at])
 
         return response
     except Exception as e:
-        logger.error(f"CSV export failed: {e}", exc_info=True)
-        return HttpResponse("Error occurred", status=500)
+        return HttpResponse(f"Error occurred: {str(e)}", status=500)
 
 
 @login_required(login_url='/login/')
 def export_json(request):
     try:
-        source_name = request.GET.get('source_name')
+        ids = request.GET.get('ids')
         recent_data = ScrapedData.objects.filter(user=request.user)
 
-        if source_name:
-            recent_data = recent_data.filter(source_name=source_name)
+        if ids:
+            id_list = ids.split(',')
+            recent_data = recent_data.filter(id__in=id_list)
 
         if not recent_data.exists():
             return HttpResponse("No data found", status=404)
 
-        response = HttpResponse(json.dumps(list(recent_data.values(
-            'source_name', 'content', 'question', 'answer'
-        )), indent=4), content_type='application/json')
+        # Convert datetime fields to string format
+        json_data = list(recent_data.values('source_name', 'content', 'question', 'answer', 'created_at'))
+        for item in json_data:
+            item['created_at'] = item['created_at'].strftime("%Y-%m-%d %H:%M:%S")  # Convert datetime to string
 
-        response['Content-Disposition'] = 'attachment; filename="filtered_scraped_data.json"'
+        response = HttpResponse(json.dumps(json_data, indent=4), content_type='application/json')
+        response['Content-Disposition'] = 'attachment; filename="scraped_data.json"'
         return response
     except Exception as e:
         logger.error(f"JSON export failed: {e}", exc_info=True)
-        return HttpResponse("Error occurred", status=500)
+        return HttpResponse(f"Error occurred: {e}", status=500)
 
 
 @login_required(login_url='/login/')
 def export_excel(request):
     try:
-        source_name = request.GET.get('source_name')
+        ids = request.GET.get('ids')
         recent_data = ScrapedData.objects.filter(user=request.user)
 
-        if source_name:
-            recent_data = recent_data.filter(source_name=source_name)
+        if ids:
+            id_list = ids.split(',')
+            recent_data = recent_data.filter(id__in=id_list)
 
         if not recent_data.exists():
             return HttpResponse("No data found", status=404)
 
-        df = pd.DataFrame(list(recent_data.values('source_name', 'content', 'question', 'answer')))
+        # Convert data into a DataFrame
+        df = pd.DataFrame(list(recent_data.values('source_name', 'content', 'question', 'answer', 'created_at')))
+
+        # Convert datetime to timezone-naive string format
+        if 'created_at' in df.columns:
+            df['created_at'] = df['created_at'].dt.tz_localize(None).dt.strftime("%Y-%m-%d %H:%M:%S")
 
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        response['Content-Disposition'] = 'attachment; filename="filtered_scraped_data.xlsx"'
+        response['Content-Disposition'] = 'attachment; filename="scraped_data.xlsx"'
 
         with pd.ExcelWriter(response, engine='xlsxwriter') as writer:
-            df.to_excel(writer, index=False, sheet_name='Filtered Data')
+            df.to_excel(writer, index=False, sheet_name='Scraped Data')
 
         return response
     except Exception as e:
         logger.error(f"Excel export failed: {e}", exc_info=True)
-        return HttpResponse("Error occurred", status=500)
+        return HttpResponse(f"Error occurred: {e}", status=500)
 
-
-logger = logging.getLogger("django")
 
 def extract_docx_to_df(file_path):
     document = Document(file_path)
@@ -242,5 +251,10 @@ def scrape_data(request):
     if source_filter:
         scraped_data = scraped_data.filter(source_name=source_filter)
 
+    # **Pagination Setup**
+    paginator = Paginator(scraped_data, 10)  # 10 rows per page
+    page_number = request.GET.get('page')
+    page_data = paginator.get_page(page_number)
+
     sources = ScrapedData.objects.filter(user=request.user).values_list('source_name', flat=True).distinct()
-    return render(request, "index.html", {"data": scraped_data, "sources": sources})
+    return render(request, "index.html", {"data": page_data, "sources": sources})

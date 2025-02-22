@@ -14,14 +14,16 @@
 
 <!-- Navbar (Always on Top) -->
 <nav class="navbar navbar-dark bg-primary p-2 fixed-top shadow-lg">
-  <a class="navbar-brand text-white"><b>SCRAPPER</b> </a>
-  <form class="d-flex">
-      {% if request.user.is_authenticated %}
-        <a href="/logout/" class="btn btn-light" type="submit">Logout</a>
-      {% else %}
-      <a href="/login/" class="btn btn-light" type="submit"> Login</a>
-      {% endif %}
-  </form>
+    <a class="navbar-brand text-white" href="/">
+       <img src="{% static 'images/lifehub-Logo.png' %}" alt="LifeHub" height="45" style="margin-left: 2pc;">
+    </a>
+    <form class="d-flex">
+        {% if request.user.is_authenticated %}
+            <a href="/logout/" class="btn btn-light" type="submit">Logout</a>
+        {% else %}
+            <a href="/login/" class="btn btn-light" type="submit">Login</a>
+        {% endif %}
+    </form>
 </nav>
 
 <!-- Page Content Block -->

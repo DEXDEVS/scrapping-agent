@@ -6,7 +6,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #F1F6F9; /* Soft light background */
+    background: linear-gradient(135deg, #3e92cc, #f1f6f9, #d9e7f5); /* Smooth gradient */
+    min-height: 100vh;
 }
 
 /* Centering the Form */
@@ -39,7 +40,7 @@ body {
     color: #3E92CC; /* Primary color */
     text-align: center;
     font-weight: 700;
-    text-transform: uppercase;
+    text-transform: capitalize;
     letter-spacing: 1px;
     background: linear-gradient(45deg, #3E92CC, #FF6347); /* Gradient with primary and secondary colors */
     -webkit-background-clip: text;
@@ -48,6 +49,7 @@ body {
     padding: 10px 0;
     background-color: #F1F6F9;
 }
+
 
 /* Input Styling */
 .input-label {
@@ -197,4 +199,32 @@ body {
         flex-direction: column;
         gap: 10px;
     }
+}
+/* Pagination Styling */
+.pagination .page-item .page-link {
+    color: #3e92cc; /* Blue text */
+    background-color: white; /* White background */
+    border: 1px solid #3e92cc;
+    transition: all 0.3s ease-in-out;
+    outline: none; /* Remove focus outline */
+    box-shadow: none !important; /* Remove box shadow */
+}
+
+.pagination .page-item .page-link:hover,
+.pagination .page-item .page-link:focus {
+    background-color: #3e92cc; /* Blue background on hover */
+    color: white; /* White text */
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #3e92cc; /* Active page blue */
+    border-color: #3e92cc;
+    color: white; /* White text */
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #d9e7f5; /* Soft light background */
+    color: #3e92cc; /* Blue text */
+    border-color: #3e92cc;
+    cursor: not-allowed;
 }

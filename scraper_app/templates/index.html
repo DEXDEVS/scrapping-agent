@@ -1,59 +1,55 @@
-    {% extends 'base.html' %}
+{% extends 'base.html' %}
 
-    {% block title %}Scrape Data{% endblock %}
+{% block title %}Scrape Data{% endblock %}
 
-    {% block content %}
-    <br><br><br>
-    <div class="page-container">
-        <!-- Form Section -->
-        <div class="container form-container">
-            <h2 class="form-title">Smart Scraping</h2>
+{% block content %}
+<br><br><br>
+<div class="page-container">
+    <div class="container form-container">
+        <h2 class="form-title">LifeHub Scrapper </h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="url" class="input-label">🌐 Enter Website URL:</label>
+                <input type="url" name="url" id="url" class="form-control" placeholder="Enter Website URL" pattern="https?://.*">
+                <small class="form-text text-muted">Enter a valid URL (e.g., https://example.com)</small>
+            </div>
+            <div class="form-group">
+                <label for="pdf" class="input-label">📄 Upload PDF:</label>
+                <input type="file" name="pdf" id="pdf" class="form-control" accept=".pdf">
+                <small class="form-text text-muted">Only PDF files are allowed</small>
+            </div>
+            <div class="form-group">
+                <label for="docx" class="input-label">📃 Upload DOCX:</label>
+                <input type="file" name="docx" id="docx" class="form-control" accept=".docx">
+                <small class="form-text text-muted">Only DOCX files are allowed</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-custom mt-3"> Scrape Now</button>
+        </form>
 
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="url" class="input-label">🌐 Enter Website URL:</label>
-                    <input type="url" name="url" id="url" class="form-control" placeholder="Enter Website URL" pattern="https?://.*">
-                    <small class="form-text text-muted">Enter a valid URL (e.g., https://example.com)</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="pdf" class="input-label">📄 Upload PDF:</label>
-                    <input type="file" name="pdf" id="pdf" class="form-control" accept=".pdf">
-                    <small class="form-text text-muted">Only PDF files are allowed</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="docx" class="input-label">📃 Upload DOCX:</label>
-                    <input type="file" name="docx" id="docx" class="form-control" accept=".docx">
-                    <small class="form-text text-muted">Only DOCX files are allowed</small>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-lg btn-custom mt-3"> Scrape Now</button>
-            </form>
-          {% if user.is_authenticated %}
-    <div class="export-buttons">
-        <a href="{% url 'export_csv' %}?source_name={{ request.GET.source_name }}" class="btn btn-outline-success export-btn">📊 Export CSV</a>
-        <a href="{% url 'export_json' %}?source_name={{ request.GET.source_name }}" class="btn btn-outline-warning export-btn">📜 Export JSON</a>
-        <a href="{% url 'export_excel' %}?source_name={{ request.GET.source_name }}" class="btn btn-outline-info export-btn">📑 Export Excel</a>
-    </div>
-    {% else %}
-    <p class="alert alert-danger text-center mt-3">⚠️ You must be logged in to export data.</p>
-    {% endif %}
-
+        {% if user.is_authenticated %}
+        <div class="export-buttons mt-4">
+            <button onclick="exportSelected('csv')" class="btn btn-outline-success export-btn">📊 Export CSV</button>
+            <button onclick="exportSelected('json')" class="btn btn-outline-warning export-btn">📜 Export JSON</button>
+            <button onclick="exportSelected('excel')" class="btn btn-outline-info export-btn">📑 Export Excel</button>
         </div>
+        {% else %}
+        <p class="alert alert-danger text-center mt-3">⚠️ You must be logged in to export data.</p>
+        {% endif %}
     </div>
+</div>
 
+{% if data %}
+<div class="container table-container mt-4">
+    <h3 class="table-title">Extracted Data</h3>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered table-striped">
+            <thead class="table-light">
+                <tr>
+<th style="width: 70px; text-align: left;">
+    <input type="checkbox" id="selectAll"> &nbsp; ID
+</th>
 
-    <!-- Scraped Data Table -->
-    {% if data %}
-    <div class="container table-container mt-4">
-        <h3 class="table-title">Extracted Data</h3>
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered table-striped">
-                <thead class="table-light">
-                    <tr>
-                        <th>ID</th>
     <th>
         Source Name
         <a href="#" data-bs-toggle="dropdown">
@@ -70,38 +66,91 @@
             {% endfor %}
         </ul>
     </th>
+                    <th>Content</th>
+                    <th>Question</th>
+                    <th>Answer</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
 
-                        <th>Content</th>
-                        <th>Question</th>
-                        <th>Answer</th>
-                        <th>Date</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in data %}
-                    <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ item.source_name }}</td>
-                        <td>{{ item.content|truncatechars:100 }}</td>
-                        <td>{{ item.question|default:"N/A" }}</td>
-                        <td>{{ item.answer|default:"N/A" }}</td>
-                        <td>{{ item.created_at|date:"Y-m-d H:i" }}</td>
-                        <td>
-                            <form method="post" action="{% url 'delete_data' item.id %}">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    {% empty %}
-                    <tr>
-                        <td colspan="7" class="text-center text-danger">No data found for this source.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <th scope="row"><input type="checkbox" class="row-checkbox" value="{{ item.id }}"> &nbsp;{{ forloop.counter }}</th>
+                    <td>{{ item.source_name }}</td>
+                    <td>{{ item.content|truncatechars:100 }}</td>
+                    <td>{{ item.question|default:"N/A" }}</td>
+                    <td>{{ item.answer|default:"N/A" }}</td>
+                    <td>{{ item.created_at|date:"Y-m-d H:i" }}</td>
+                    <td>
+                        <form method="post" action="{% url 'delete_data' item.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center text-danger">No data found for this source.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
     </div>
-    {% endif %}
-    {% endblock %}
+</div>
+{% endif %}
+
+<script>
+document.getElementById('selectAll').addEventListener('change', function () {
+    let checkboxes = document.querySelectorAll('.row-checkbox');
+    checkboxes.forEach(checkbox => checkbox.checked = this.checked);
+});
+
+function exportSelected(format) {
+    let selectedIds = Array.from(document.querySelectorAll('.row-checkbox:checked'))
+        .map(cb => cb.value);
+
+    let url = `{% url 'export_csv' %}`;
+    if (format === 'json') url = `{% url 'export_json' %}`;
+    if (format === 'excel') url = `{% url 'export_excel' %}`;
+
+    if (selectedIds.length > 0) {
+        url += `?ids=` + selectedIds.join(',');
+    }
+
+    window.location.href = url;
+}
+</script>
+<br><br>
+ <!-- Bootstrap Pagination -->
+ <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        {% if data.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ data.previous_page_number }}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        {% endif %}
+
+        {% for num in data.paginator.page_range %}
+            <li class="page-item {% if data.number == num %}active{% endif %}">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+        {% endfor %}
+
+        {% if data.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ data.next_page_number }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
+
+</div>
+
+{% endblock %}
